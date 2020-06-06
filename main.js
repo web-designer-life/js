@@ -6,3 +6,4 @@ const mission = 23;
 const period = 121;
 
 alert('hello');
+console.log('hi');
