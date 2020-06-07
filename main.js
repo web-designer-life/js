@@ -1,9 +1,9 @@
-var money = 31;
-var income = 12;
-let addExpenses = 22;
-let deposit = 33;
-const mission = 23;
-const period = 121;
+var money = 1200;
+var income = 'макдоналдс';
+let addExpenses = ['интернет', 'такси', 'коммуналка', 'еда'];
+let deposit = true;
+const mission = 2345;
+const period = 3;
 
 alert('hello');
 console.log('as');
