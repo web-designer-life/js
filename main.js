@@ -56,7 +56,7 @@ amount1 = prompt('Во сколько это обойдется?');
 expenses2 = prompt('Введите обязательную статью расходов?');
 amount2 = prompt('Во сколько это обойдется?');
 
-let amounts = getExpensesMonth(+amount1, +amount1);
+let amounts = getExpensesMonth(+amount1, +amount2);
 
 let accumulatedMonth = getAccumulatedMonth(+money, amounts);
 console.log('Бюджет на месяц: ', accumulatedMonth);
