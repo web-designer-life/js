@@ -19,25 +19,3 @@ const calculateButton = document.getElementById('start'),
       additionalExpensesItem = document.querySelector('.additional_expenses-item'),
       targetAmount = document.querySelector('.target-amount'),
       periodSelect = document.querySelector('.period-select');
-
-      console.log(calculateButton);
-      console.log(incomeAdd);
-      console.log(expensesAdd);
-      console.log(depositCheck);
-      console.log(additionalIncome1);
-      console.log(additionalIncome2);
-      console.log(budgetMonthValue);
-      console.log(budgetDayValue);
-      console.log(expensesMonthValue);
-      console.log(additionalIncomeValue);
-      console.log(additionalExpensesValue);
-      console.log(incomePeriodValue);
-      console.log(targetMonthValue);
-      console.log(expensesTitle);
-      console.log(expensesAmount);
-      console.log(incomeTitle);
-      console.log(incomeAmount);
-      console.log(salaryAmount);
-      console.log(additionalExpensesItem);
-      console.log(targetAmount);
-      console.log(periodSelect);
