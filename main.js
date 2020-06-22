@@ -145,11 +145,11 @@ let appData = {
     getInfoDeposit: function() {
         if (appData.deposit) {
             do {
-                appData.percentDeposit = prompt('Какой годовой процент?', '1000');
+                appData.percentDeposit = prompt('Какой у вас годовой процент?', '1000');
             } 
             while (!isNumber(appData.percentDeposit));
             do {
-                appData.moneyDeposit = prompt('Какая сумма заложена', '1000');
+                appData.moneyDeposit = prompt('Какая у вас сумма заложена?', '1000');
             } 
             while (!isNumber(appData.moneyDeposit));
         }
