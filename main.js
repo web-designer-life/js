@@ -18,9 +18,7 @@ let start = document.getElementById('start'),
     targetAmount = document.querySelector('.target-amount'),
     periodSelect = document.querySelector('.period-select'),
     incomeItem = document.querySelectorAll('.income-items'),
-    periodAmount = document.querySelector('.period-amount'),
-    inputNumber = document.querySelectorAll('[placeholder="Сумма"]'),   
-    inputText = document.querySelectorAll('[placeholder="Наименование"]');    
+    periodAmount = document.querySelector('.period-amount');  
 
 const isNumber = function(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
@@ -171,7 +169,36 @@ let appData = {
         return this.budgetMonth * periodSelect.value;
     },
     reset: function(){   
-        location.reload();
+        start.style.display = 'block';
+        cancel.style.display = 'none';
+        let allDataInputs = document.querySelectorAll('.data [type="text"]');
+        allDataInputs.forEach(function(item){
+            item.removeAttribute("disabled"); 
+            item.value = "";
+        });
+        periodSelect.removeAttribute("disabled");
+        expensesAddBtn.removeAttribute("disabled");
+        incomeAddBtn.removeAttribute("disabled");
+        depositCheck.removeAttribute("disabled");
+        budgetMonthValue.value = 0;
+        budgetDayValue.value = 0;
+        expensesMonthValue.value = 0;
+        incomePeriodValue.value = 0;
+        targetMonthValue.value = "Срок";
+        additionalIncomeValue.value = "Наименования";
+        additionalExpensesValue.value = "Наименования";
+        periodSelect.value = 1;
+        periodAmount.textContent = "1";
+        depositCheck.checked = false;
+        for (let i = incomeItem.length - 1; i > 0; i--) {
+            incomeItem[i].remove();
+        }
+        for (let i = expensesItems.length - 1; i > 0; i--) {
+            expensesItems[i].remove();
+        }
+        incomeAddBtn.style.display = 'block';
+        expensesAddBtn.style.display = 'block';
+        start.setAttribute("disabled", true);
     }
 };
 
@@ -185,8 +212,10 @@ start.addEventListener('click', function() {
     allDataInputs.forEach(function(item){
         item.setAttribute('disabled', true);   
     });
+    periodSelect.setAttribute('disabled', true);
     expensesAddBtn.setAttribute('disabled', true);
     incomeAddBtn.setAttribute('disabled', true);
+    depositCheck.setAttribute('disabled', true);
 });
 
 cancel.addEventListener('click', appData.reset);
