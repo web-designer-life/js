@@ -174,7 +174,19 @@ salaryAmount.addEventListener('input', function() {
         start.removeAttribute('disabled');
     }
 });
-start.addEventListener('click', appData.start);
+
+start.addEventListener('click', function() {
+  appData.start();
+  start.style.display = 'none';
+  cancel.style.display = 'block';
+  let allDataInputs = document.querySelectorAll('.data [type="text"]');
+  allDataInputs.forEach(function(item){
+    item.setAttribute('disabled', true);   
+  });
+  expensesAddBtn.setAttribute('disabled', true);
+  incomeAddBtn.setAttribute('disabled', true);
+
+});
 cancel.addEventListener('click', appData.reset);
 expensesAddBtn.addEventListener('click', appData.addExpensesBlock);
 incomeAddBtn.addEventListener('click', appData.addIncomeBlock);
