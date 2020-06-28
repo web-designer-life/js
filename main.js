@@ -203,7 +203,7 @@ let appData = {
 };
 
 start.setAttribute("disabled", true);
-
+start.addEventListener('click', appData.start.bind(appData));
 start.addEventListener('click', function() {
     appData.start();
     start.style.display = 'none';
