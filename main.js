@@ -24,7 +24,10 @@ const start = document.getElementById('start'),
       expensesTitle = document.querySelector('.expenses-title'),
       targetAmount = document.querySelector('.target-amount'),
       periodSelect = document.querySelector('.period-select'),
-      periodAmount = document.querySelector('.period-amount');
+      periodAmount = document.querySelector('.period-amount'),
+      depositBank = document.querySelector('.deposit-bank'),
+      depositAmount = document.querySelector('.deposit-amount'),
+      depositPercent = document.querySelector('.deposit-percent');
     
 let expensesItems = document.querySelectorAll('.expenses-items'),    
     incomeItem = document.querySelectorAll('.income-items');   
@@ -149,7 +152,11 @@ class AppData {
     }
 
     getBudget() {
-        this.budgetMonth = +this.budget +  this.incomeMonth - this.expensesMonth;
+        if (this.percentDeposit > 1) {
+            this.percentDeposit = this.percentDeposit / 100;
+        }
+        const monthDeposit = this.moneyDeposit * this.percentDeposit;
+        this.budgetMonth = +this.budget +  this.incomeMonth - this.expensesMonth + monthDeposit;
         this.budgetDay  = Math.floor(this.budgetMonth / 30);
     }
 
@@ -170,15 +177,9 @@ class AppData {
     }
 
     getInfoDeposit() {
-        if (this.deposit) {
-            do {
-                this.percentDeposit = prompt('Какой годовой процент?', '1000');
-            } 
-            while (!isNumber(this.percentDeposit));
-            do {
-                this.moneyDeposit = prompt('Какая сумма заложена?', '1000');
-            } 
-            while (!isNumber(this.moneyDeposit));    
+        if (this.deposit) {      
+            this.percentDeposit = depositPercent.value;     
+            this.moneyDeposit =  depositAmount.value; 
         }
     }
 
@@ -198,6 +199,7 @@ class AppData {
         expensesAddBtn.removeAttribute("disabled");
         incomeAddBtn.removeAttribute("disabled");
         depositCheck.removeAttribute("disabled");
+        depositPercent.style.display = 'none';
         budgetMonthValue.value = 0;
         budgetDayValue.value = 0;
         expensesMonthValue.value = 0;
@@ -216,7 +218,45 @@ class AppData {
         }
         incomeAddBtn.style.display = 'block';
         expensesAddBtn.style.display = 'block';
+        depositBank.style.display = 'none';
+        depositAmount.style.display = 'none';
         start.setAttribute("disabled", true);
+    }
+
+    depositHandler() {
+        if (depositCheck.checked) {
+            depositBank.style.display = 'inline-block';
+            depositAmount.style.display = 'inline-block';
+            this.deposit = true;
+            depositBank.addEventListener('change', this.changePercent);
+        } else {
+            depositBank.style.display = 'none';
+            depositAmount.style.display = 'none';
+            depositBank.value = '';
+            depositAmount.value = '';
+            this.deposit = false;
+            depositBank.removeEventListener('change', this.changePercent);
+        }
+    }
+
+    changePercent() {
+        const valueSelect = this.value;
+        if (valueSelect === 'other') {
+            depositPercent.disabled = false;
+            depositPercent.style.display = 'inline-block';
+            depositPercent.value = '';
+            depositPercent.addEventListener('change', () => {
+                if (!(isNumber(depositPercent.value) && depositPercent.value > 0 && depositPercent.value < 100)) {
+                    alert('Введите корректное значение процента');
+                } else {
+                    start.removeAttribute("disabled");
+                }
+            });    
+        } else {
+            depositPercent.disabled = true;
+            depositPercent.style.display = 'none';
+            depositPercent.value = valueSelect;
+        }
     }
 
     eventsListeners() {
@@ -239,6 +279,7 @@ class AppData {
                 start.removeAttribute("disabled");
             }
         });
+        depositCheck.addEventListener('change', this.depositHandler.bind(this));
     }
 }
 
