@@ -48,10 +48,6 @@ class AppData {
         this.moneyDeposit = 0;  
     }
 
-    check() {
-        start.setAttribute("disabled", true);
-    }
-
     start() { 
         start.style.display = 'none';
         cancel.style.display = 'block';
@@ -70,6 +66,10 @@ class AppData {
         this.getAddExpInc();
         this.getBudget();
         this.showResult();
+    }
+    
+    check() {
+        start.setAttribute("disabled", true);
     }
 
     showResult() {
